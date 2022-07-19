@@ -1,0 +1,27 @@
+name: Build Workflow
+
+on:
+  push:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+          architecture: 'x64'
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Generate banner
+        run: python generateBanner.py doc\images\banner.png
+      - name: Create executable
+        run: python -m PyInstaller --name=uploader.exe --windowed --onefile tasmotizer.py
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: uploader-windows
+          path: dist/uploader.exe
