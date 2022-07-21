@@ -51,3 +51,27 @@ jobs:
         with:
           name: uploader-linux
           path: dist/uploader.gz
+
+  build-macos:
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Generate banner
+        run: python generateBanner.py doc/images/banner.png
+      - name: Create executable
+        run: |
+          python -m PyInstaller --name=uploader --windowed --onefile tasmotizer.py
+          tar -cvf uploader.tar dist/*
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: uploader-macOS
+          path: uploader.tar
