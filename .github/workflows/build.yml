@@ -43,14 +43,12 @@ jobs:
       - name: Generate banner
         run: python generateBanner.py doc/images/banner.png
       - name: Create executable
-        run: |
-          python -m PyInstaller --name=uploader --windowed --onefile tasmotizer.py
-          gzip dist/uploader
+        run: python -m PyInstaller --name=uploader --windowed --onefile tasmotizer.py
       - name: Archive artifacts
         uses: actions/upload-artifact@v3
         with:
           name: uploader-linux
-          path: dist/uploader.gz
+          path: dist/uploader
 
   build-macos:
     runs-on: macOS-latest
@@ -67,11 +65,9 @@ jobs:
       - name: Generate banner
         run: python generateBanner.py doc/images/banner.png
       - name: Create executable
-        run: |
-          python -m PyInstaller --name=uploader --windowed --onefile tasmotizer.py
-          tar -cvf uploader.tar dist/*
+        run: python -m PyInstaller --name=uploader --windowed --onefile tasmotizer.py
       - name: Archive artifacts
         uses: actions/upload-artifact@v3
         with:
           name: uploader-macOS
-          path: uploader.tar
+          path: dist/uploader.app
