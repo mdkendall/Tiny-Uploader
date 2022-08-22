@@ -42,6 +42,8 @@ jobs:
         run: pip install -r requirements.txt
       - name: Generate banner
         run: python generateBanner.py doc/images/banner.png
+      - name: Install libraries
+        run: apt-get install libxcb-xinerama0 pyqt5-dev-tools
       - name: Create executable
         run: python -m PyInstaller --name=uploader --windowed --onefile tasmotizer.py
       - name: Archive artifacts
