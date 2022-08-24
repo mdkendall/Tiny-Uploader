@@ -25,9 +25,15 @@ Tiny Uploader automatically downloads the firmware binary file at run-time from 
 
 Some web browsers and/or operating systems may flag the Uploader executables as potentially dangerous since they are unsigned. If you have the capability, you may consider signing your executables.
 
-## Screenshot
+## Screenshots
 
-![Screenshot](doc/images/screenshot.jpg)
+### Windows
+
+![Screenshot](doc/images/screenshot-windows.jpg)
+
+### Ubuntu
+
+![Screenshot](doc/images/screenshot-ubuntu.png)
 
 ## Credits
 
