@@ -35,6 +35,10 @@ Some web browsers and/or operating systems may flag the Uploader executables as 
 
 ![Screenshot](doc/images/screenshot-ubuntu.png)
 
+### macOS
+
+![Screenshot](doc/images/screenshot-macos.png)
+
 ## Credits
 
 - (c) 2019 Jacek Ziółkowski https://github.com/jziolkowski
