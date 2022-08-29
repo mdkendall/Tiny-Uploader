@@ -43,7 +43,7 @@ jobs:
       - name: Generate banner
         run: python generateBanner.py doc/images/banner.png
       - name: Install libraries
-        run: sudo apt-get install libxcb-xinerama0 pyqt5-dev-tools
+        run: sudo apt-get install libxcb-xinerama0 python3-pyqt5
       - name: Create executable
         run: python -m PyInstaller --name=uploader --windowed --onefile tasmotizer.py
       - name: Archive artifacts
