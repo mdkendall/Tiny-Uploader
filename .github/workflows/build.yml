@@ -54,20 +54,25 @@ jobs:
 
   build-macos:
     runs-on: macOS-latest
+    env:
+      # We need the official Python, because the GA ones only support newer macOS versions
+      # The deployment target is picked up by the Python build tools automatically
+      PYTHON_VERSION: 3.9.1
+      MACOSX_DEPLOYMENT_TARGET: 10.9
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Get Python
+        run: curl https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VERSION}-macosx10.9.pkg -o "python.pkg"
       - name: Install Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-          cache: 'pip'
+        run: |
+          sudo installer -pkg python.pkg -target /
       - name: Install requirements
-        run: pip install -r requirements.txt
+        run: pip3 install -r requirements.txt
       - name: Generate banner
-        run: python generateBanner.py doc/images/banner.png
+        run: python3 generateBanner.py doc/images/banner.png
       - name: Create executable
-        run: python -m PyInstaller --name=uploader --windowed --onefile tasmotizer.py
+        run: python3 -m PyInstaller --name=uploader --windowed --onefile tasmotizer.py
       - name: Archive artifacts
         uses: actions/upload-artifact@v3
         with:
